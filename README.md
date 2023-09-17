@@ -1,11 +1,14 @@
-# Kiwi Slang Generator #
+### Kiwi Slang Generator 🥝 🇳🇿
 
-My guide to help you learn the true kiwi slangs.
+This is a simple Kiwi Slang Generator! 
 
-Coming soon - Audios and true accents.
+This app offers a fun and interactive way to discover and learn slang words and phrases commonly used in Aoatearoa.
 
 <img src="/app/src/main/res/drawable/app_ui.gif" width="150" hspace="5">
 
+*Screenshot of the Kiwi Slang Generator in action.*
+
 ---
-## Contributions ##
-You are welcome :)
+## Contributions
+
+If you have suggestions, improvements, or new slang terms to add, please fork the repo, make your additions, and submit a pull request.
