@@ -2,7 +2,7 @@
 
 This is a simple Kiwi Slang Generator! 
 
-This app offers a fun and interactive way to discover and learn slang words and phrases commonly used in Aoatearoa.
+This app offers a fun and interactive way to discover and learn slang words and phrases commonly used in Aotearoa.
 
 <img src="/app/src/main/res/drawable/app_ui.gif" width="150" hspace="5">
 
