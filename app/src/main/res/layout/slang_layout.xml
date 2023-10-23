@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#51b46d"
     android:padding="50dp"
-    tools:context=".SlangGeneratorActivity">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/title"

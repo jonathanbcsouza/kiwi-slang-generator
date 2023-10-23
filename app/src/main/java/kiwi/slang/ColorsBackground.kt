@@ -5,6 +5,7 @@ import android.graphics.Color
 import java.util.Random
 
 class ColorsBackground {
+// how to unstage a file in git
 
     private val colors = arrayOf("#39add1", // light blue
             "#3079ab", // dark blue
