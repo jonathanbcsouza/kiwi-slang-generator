@@ -17,6 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    namespace 'kiwi.slang'
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

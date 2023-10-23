@@ -8,7 +8,7 @@ buildscript {
         mavenCentral()  // Added this as a replacement for jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.1.2'
         // Updated Android Gradle plugin; consider checking for a newer version
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
