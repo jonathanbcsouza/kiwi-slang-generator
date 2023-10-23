@@ -1,31 +1,24 @@
 package kiwi.slang
 
-import android.graphics.Color
-
+import android.content.Context
 import java.util.Random
 
-class ColorsBackground {
-// how to unstage a file in git
+class ColorsBackground(private val context: Context) {
 
-    private val colors = arrayOf("#39add1", // light blue
-            "#3079ab", // dark blue
-            "#c25975", // mauve
-            "#e15258", // red
-            "#f9845b", // orange
-            "#838cc7", // lavender
-            "#7d669e", // purple
-            "#53bbb4", // aqua
-            "#51b46d", // green
-            "#e0ab18", // mustard
-            "#637a91", // dark gray
-            "#f092b0", // pink
-            "#b7c0c7"  // light gray
-    )
+    private val colors: IntArray by lazy {
+        val typedArray = context.resources.obtainTypedArray(R.array.background_colors)
+        val colorsArray = IntArray(typedArray.length()) {
+            typedArray.getColor(it, 0)
+        }
+        typedArray.recycle()
+        colorsArray
+    }
 
     internal val color: Int
         get() {
             val slangGenerator = Random()
             val randomNumber = slangGenerator.nextInt(colors.size)
-            return Color.parseColor(colors[randomNumber])
+            return colors[randomNumber]
         }
 }
+
