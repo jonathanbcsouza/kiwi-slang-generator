@@ -4,9 +4,9 @@ import Slangs
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout // <-- Import this
 import com.kiwi.quest.ColorsBackground
 
 class MainActivity : AppCompatActivity() {
@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var getOther: Slangs
     private lateinit var btnChangeMsg: Button
     private lateinit var randomMsg: TextView
-    private lateinit var backgroundColorAnimation: RelativeLayout
+    private lateinit var backgroundColorAnimation: ConstraintLayout
     private val colorsBackground = ColorsBackground(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
