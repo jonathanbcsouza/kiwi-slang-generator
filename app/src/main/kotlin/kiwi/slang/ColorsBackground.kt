@@ -4,7 +4,7 @@ import android.content.Context
 import java.util.Random
 
 class ColorsBackground(private val context: Context) {
-
+    
     private val colors: IntArray by lazy {
         val typedArray = context.resources.obtainTypedArray(R.array.background_colors)
         val colorsArray = IntArray(typedArray.length()) {

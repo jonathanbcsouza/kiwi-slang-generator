@@ -1,5 +1,6 @@
 package kiwi.slang
 
+import Slangs
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -9,7 +10,7 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
-    private val getOther = Slangs()
+    private lateinit var getOther: Slangs  // Changed to lateinit var
     private lateinit var btnChangeMsg: Button
     private lateinit var randomMsg: TextView
     private lateinit var backgroundColorAnimation: RelativeLayout
@@ -20,13 +21,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.slang_layout)
         Log.v(TAG, "Activity created!")
 
+        getOther = Slangs(this)  // Initialized here with a Context
+
         randomMsg = findViewById(R.id.msg)
         btnChangeMsg = findViewById(R.id.button)
         backgroundColorAnimation = findViewById(R.id.background)
 
         btnChangeMsg.setOnClickListener {
             val slang = getOther.getSlangs()
-            randomMsg.text = slang
+            val formattedSlang = "${slang.first} - ${slang.second}"
+            randomMsg.text = formattedSlang
             val color = colorsBackground.color
             backgroundColorAnimation.setBackgroundColor(color)
             btnChangeMsg.setTextColor(color)
