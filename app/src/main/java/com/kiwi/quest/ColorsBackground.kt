@@ -1,6 +1,7 @@
-package kiwi.slang
+package com.kiwi.quest
 
 import android.content.Context
+import com.kiwi.quest.R
 import java.util.Random
 
 class ColorsBackground(private val context: Context) {
