@@ -4,8 +4,8 @@
     android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#51b46d"
-    android:padding="50dp"
+    android:background="@color/background_color"
+    android:padding="@dimen/default_padding"
     tools:context=".MainActivity">
 
     <TextView
@@ -13,24 +13,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/header"
-        android:textColor="#80ffffff"
-        android:textSize="24sp" />
+        style="@style/Header" />
 
     <TextView
         android:id="@+id/msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:textColor="@android:color/white"
         android:layout_centerVertical="true"
         android:text="@string/welcome"
-        android:textSize="24sp" />
+        style="@style/SlangText" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="@string/btn_new_slang" />
+        android:text="@string/btn_new_slang"
+        style="@style/ButtonStyle" />
 
 </RelativeLayout>

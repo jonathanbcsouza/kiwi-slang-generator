@@ -4,6 +4,3 @@
     <option name="version" value="1.9.0" />
   </component>
 </project>
-
-// add all changed files to git even if it is in .gitignore
-git add -f .
