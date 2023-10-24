@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">KiwiSlang</string>
+    <string name="app_name">KiwiQuest</string>
+    <string name="the_slang_of_the_day">The slang of the day</string>
+    <string name="btn_new_slang">New Slang</string>
 </resources>

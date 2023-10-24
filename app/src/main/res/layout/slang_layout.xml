@@ -12,7 +12,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="The slang of the day"
+        android:text="@string/the_slang_of_the_day"
         android:textColor="#80ffffff"
         android:textSize="24sp" />
 
@@ -32,6 +32,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="New Slang" />
+        android:text="@string/btn_new_slang" />
 
 </RelativeLayout>
