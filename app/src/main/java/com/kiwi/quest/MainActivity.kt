@@ -1,13 +1,19 @@
 package com.kiwi.quest
 
+import DataLoader
 import Slangs
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout // <-- Import this
-import com.kiwi.quest.ColorsBackground
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.firebase.FirebaseApp
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +28,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Log.v(TAG, "Activity created!")
 
-        getOther = Slangs(this)
+        FirebaseApp.initializeApp(this)
+        val databaseReference = FirebaseDatabase.getInstance().reference
+
+        databaseReference.child("slangs").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val dataLoader = DataLoader()
+                val slangsList = dataLoader.loadSlangs(dataSnapshot)
+                getOther = Slangs(slangsList)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w(TAG, "Failed to read data.", databaseError.toException())
+            }
+        })
+
+        getOther = Slangs(listOf("" to ""))
 
         randomMsg = findViewById(R.id.msg)
         btnChangeMsg = findViewById(R.id.button)

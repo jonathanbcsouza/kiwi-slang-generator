@@ -1,9 +1,7 @@
-import android.content.Context
 import java.util.Random
 
-class Slangs(context: Context) {
-    private val dataLoader = DataLoader(context)
-    private val slangs = dataLoader.loadSlangs()
+
+class Slangs(private val slangs: List<Pair<String, String>>) {
 
     internal fun getSlangs(): Pair<String, String> {
         val slangGenerator = Random()
@@ -11,3 +9,4 @@ class Slangs(context: Context) {
         return slangs[randomNumber]
     }
 }
+

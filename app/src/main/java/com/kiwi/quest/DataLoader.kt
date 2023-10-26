@@ -1,17 +1,15 @@
-import android.content.Context
-import org.json.JSONObject
-import java.io.InputStream
+import com.google.firebase.database.DataSnapshot
 
-class DataLoader(private val context: Context) {
+class DataLoader {
 
-    fun loadSlangs(): List<Pair<String, String>> {
-        val inputStream: InputStream = context.assets.open("data.json")
-        val jsonText = inputStream.bufferedReader().use { it.readText() }
-        val jsonObject = JSONObject(jsonText)
-        val jsonArray = jsonObject.getJSONArray("slangs")
-        return List(jsonArray.length()) { i ->
-            val item = jsonArray.getJSONObject(i)
-            Pair(item.getString("term"), item.getString("definition"))
+    private lateinit var slangs: List<Pair<String, String>>
+
+    fun loadSlangs(dataSnapshot: DataSnapshot): List<Pair<String, String>> {
+        slangs = dataSnapshot.children.mapNotNull {
+            val term = it.child("term").getValue(String::class.java)
+            val definition = it.child("definition").getValue(String::class.java)
+            if (term != null && definition != null) Pair(term, definition) else null
         }
+        return slangs
     }
 }
