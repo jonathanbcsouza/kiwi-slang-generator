@@ -1,8 +1,7 @@
 package com.kiwi.quest
 
 import DataLoader
-import Slangs
-import android.content.ContentValues.TAG
+import Sentences
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
@@ -11,91 +10,95 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.firebase.FirebaseApp
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import java.util.Locale
-
 
 class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
-    private lateinit var textToSpeech: TextToSpeech
-
-    private lateinit var getOther: Slangs
+    private lateinit var backgroundColorAnimation: ConstraintLayout
     private lateinit var btnChangeMsg: Button
     private lateinit var btnSpeak: Button
+    private lateinit var slangProvider: Sentences
     private lateinit var randomMsg: TextView
-    private lateinit var backgroundColorAnimation: ConstraintLayout
+    private lateinit var textToSpeech: TextToSpeech
     private val colorsBackground = ColorsBackground(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        textToSpeech = TextToSpeech(this, this)
+        initializeTextToSpeech()
+        initializeFirebase()
+        initializeUIComponents()
+    }
 
+    private fun initializeTextToSpeech() {
+        textToSpeech = TextToSpeech(this, this)
+    }
+
+    private fun initializeFirebase() {
         FirebaseApp.initializeApp(this)
         val databaseReference = FirebaseDatabase.getInstance().reference
-
         databaseReference.child("slangs").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val dataLoader = DataLoader()
-                val slangsList = dataLoader.loadSlangs(dataSnapshot)
-                getOther = Slangs(slangsList)
+                val slangsList = dataLoader.loadData(dataSnapshot)
+                slangProvider = Sentences(slangsList)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                Log.w("MainActivity", "Failed to read data.", databaseError.toException())
+                Log.w("TextToSpeechDemo", "Failed to read data.", databaseError.toException())
             }
         })
 
-        getOther = Slangs(listOf("" to ""))
+        slangProvider = Sentences(listOf("" to ""))
+    }
 
+    private fun initializeUIComponents() {
         randomMsg = findViewById(R.id.msg)
         btnChangeMsg = findViewById(R.id.btnCreateNew)
         backgroundColorAnimation = findViewById(R.id.background)
+        btnSpeak = findViewById(R.id.btnSpeak)
 
         btnChangeMsg.setOnClickListener {
-            val slang = getOther.getSlangs()
-            val formattedSlang = "${slang.first} - ${slang.second}"
-            randomMsg.text = formattedSlang
-            val color = colorsBackground.color
-            backgroundColorAnimation.setBackgroundColor(color)
-            btnChangeMsg.setTextColor(color)
+            updateMessageAndColors()
         }
 
-        btnSpeak = findViewById(R.id.btnSpeak)
         btnSpeak.setOnClickListener {
-            val textToSpeak = randomMsg.text.toString()
-            if (textToSpeak.isNotEmpty()) {
-                textToSpeech.speak(textToSpeak, TextToSpeech.QUEUE_FLUSH, null, null)
-            }
+            speakText()
         }
+    }
 
+    private fun updateMessageAndColors() {
+        val slang = slangProvider.getSlangs()
+        val formattedSlang = "${slang.first} - ${slang.second}"
+        randomMsg.text = formattedSlang
+        val color = colorsBackground.color
+        backgroundColorAnimation.setBackgroundColor(color)
+        btnChangeMsg.setTextColor(color)
+    }
+
+    private fun speakText() {
+        val textToSpeak = randomMsg.text.toString()
+        if (textToSpeak.isNotEmpty()) {
+            val speakableText = textToSpeak.split("-").first().trim()
+            textToSpeech.speak(speakableText, TextToSpeech.QUEUE_FLUSH, null, null)
+        }
     }
 
     override fun onInit(status: Int) {
-
         if (status == TextToSpeech.SUCCESS) {
-            val result = textToSpeech.setLanguage(Locale.US)
-            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                Log.e(TAG, "Language is not available or supported")
-            } else {
-                // Language is supported
-
-            }
-        } else {
-            Log.e(TAG, "Initialization failed")
+            textToSpeech.language = Locale("en", "NZ")
+            textToSpeech.setPitch(1.0f)
+            textToSpeech.setSpeechRate(1.5f)
         }
     }
 
     override fun onDestroy() {
-        if (textToSpeech != null) {
-            textToSpeech.stop()
-            textToSpeech.shutdown()
+        textToSpeech?.let {
+            it.stop()
+            it.shutdown()
         }
         super.onDestroy()
     }
-
 }
