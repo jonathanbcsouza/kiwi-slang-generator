@@ -3,4 +3,5 @@
     <string name="header">Slang of the day</string>
     <string name="btn_new_slang">New Slang</string>
     <string name="welcome">Kia ora, mate!</string>
+    <string name="speak">Speak</string>
 </resources>

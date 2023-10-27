@@ -2,8 +2,8 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            <solid android:color="@color/white" />
-            <!-- Other drawable attributes like corners or stroke can be added here if needed -->
+            <solid android:color="@color/white" android:state_pressed="true"  />
+            <solid android:drawable="@color/color_on_not_pressed" />
         </shape>
     </item>
 </selector>
