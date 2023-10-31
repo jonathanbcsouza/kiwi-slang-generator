@@ -4,11 +4,12 @@ This is a simple Kiwi Slang Generator!
 
 This app offers a fun and interactive way to discover and learn slang words and phrases commonly used in Aotearoa.
 
-<img src="/app/src/main/res/drawable/app_ui.gif" width="150" hspace="5">
-
-*Screenshot of the Kiwi Slang Generator in action.*
+### Data Management:
+- Storage: Slang terms and their corresponding definitions are securely housed in Firebase.
+- Real-Time Retrieval: The application fetches data in real-time from Firebase, ensuring that users always access the most current set of slang terms.
+- Auditory Feature: Utilizing the Android Text-to-Speech (TTS), the app dynamically generates audio pronunciations for each term.
 
 ---
-## Contributions
+### License
 
-If you have suggestions, improvements, or new slang terms to add, please fork the repo, make your additions, and submit a pull request.
+This project is licensed under the [MIT license](./LICENSE.md).
