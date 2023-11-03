@@ -1,8 +1,6 @@
-### Kiwi Slang Generator 🥝 🇳🇿
+### Kiwi Quest App 🥝
 
-This is a simple Kiwi Slang Generator! 
-
-This app offers a fun and interactive way to discover and learn slang words and phrases commonly used in Aotearoa.
+This app offers a fun and interactive way to discover and learn slang words and phrases used in Aotearoa 🇳🇿.
 
 ### Data Management:
 - Storage: Slang terms and their corresponding definitions are securely housed in Firebase.
