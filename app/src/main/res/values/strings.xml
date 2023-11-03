@@ -4,4 +4,6 @@
     <string name="btn_new_slang">New Slang</string>
     <string name="welcome">Kia ora, mate!</string>
     <string name="speak">Listen</string>
+    <string name="menu_item_1">Share</string>
+    <string name="menu_item_2">Rate Us!</string>
 </resources>
